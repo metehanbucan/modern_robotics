@@ -23,3 +23,14 @@ def matrix_exp3(so3mat):
         np.eye(3) + np.sin(theta) * omega_hat + (1- np.cos(theta)) * np.dot(omega_hat, omega_hat)
     )
 
+
+def matrix_log3(R):
+    acos_input = (np.trace(R)-1)/2.0
+    theta = np.arccos(np.clip(acos_input, -1, 1))
+    if abs(theta) < 1e-6:
+        return np.zeros((3,3))
+    
+    return theta / (2 * np.sin(theta)) * (R - R.T)
+
+
+

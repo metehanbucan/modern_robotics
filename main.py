@@ -1,8 +1,14 @@
 import numpy as np
 from math_utils.se3 import *
 
-w = np.array([1,2,3])
-so3 = vec_to_so3(w)
-vec = so3_to_vec(so3)
-print(so3)
-print(vec)
+omega = np.array([0,0,1])
+so3 = vec_to_so3(omega)
+R = matrix_exp3(so3)
+
+print('rotation matrix:')
+print(R)
+
+log = matrix_log3(R)
+print(log)
+omeganew = so3_to_vec(log)
+print(omeganew)
