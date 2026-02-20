@@ -1,14 +1,20 @@
 import numpy as np
-from math_utils.se3 import *
+from math_utils.transformations import *
 
-omega = np.array([0,0,1])
-so3 = vec_to_so3(omega)
-R = matrix_exp3(so3)
+R = np.eye(3)
+p = np.array([1,2,3])
 
-print('rotation matrix:')
-print(R)
+T = RpToTrans(R,p)
+print("Transformation:")
+print(T)
 
-log = matrix_log3(R)
-print(log)
-omeganew = so3_to_vec(log)
-print(omeganew)
+newR, newP = TransToRp(T)
+print("recovered:", newR, newP)
+
+TInv = TransInv(T)
+print("TransInverse:")
+print(TInv)
+
+point = np.array([1,0,0,1])
+print("transformed point:")
+print(np.dot(T,point))
