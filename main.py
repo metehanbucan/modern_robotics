@@ -1,20 +1,20 @@
 import numpy as np
-from math_utils.transformations import *
+from math_utils.kinematics import *
 
-R = np.eye(3)
-p = np.array([1,2,3])
+M = np.eye(4)
+M[:,3] = [2,0,0,1]
 
-T = RpToTrans(R,p)
-print("Transformation:")
+SList = np.array([
+    [0,0],
+    [0,0],
+    [1,1],
+    [0,0],
+    [0,-1],
+    [0,0]
+])
+
+ThetaList = np.array([np.pi/4 , np.pi/4])
+
+T = FkinSpace(M,SList,ThetaList)
+
 print(T)
-
-newR, newP = TransToRp(T)
-print("recovered:", newR, newP)
-
-TInv = TransInv(T)
-print("TransInverse:")
-print(TInv)
-
-point = np.array([1,0,0,1])
-print("transformed point:")
-print(np.dot(T,point))
