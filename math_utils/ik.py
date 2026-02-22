@@ -55,5 +55,17 @@ def IKinSpace(Slist, M, Tsd, thetalist0, eomg = 1e-3, ev= 1e-3, max_iter = 50):
 
     return thetalist, False
 
+def analytic_inverse_kinematics_2r(T_target):
+    R,p = TransToRp(T_target)
+    x = p[0]
+    y = p[1]
 
+    phi = np.atan2(y,x)
+    r= (x**2 + y**2)**0.5
+    beta1 = np.arccos(r/2)
+    theta1 = phi - beta1
 
+    beta2 = np.arccos((2-r**2) / 2)
+    theta2 = np.pi - beta2
+
+    return theta1, theta2
