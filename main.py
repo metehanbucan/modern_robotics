@@ -1,10 +1,8 @@
 import numpy as np
 from math_utils.kinematics import *
+from math_utils.jacobian import *
 
-M = np.eye(4)
-M[:,3] = [2,0,0,1]
-
-SList = np.array([
+Slist = np.array([
     [0,0],
     [0,0],
     [1,1],
@@ -15,6 +13,13 @@ SList = np.array([
 
 ThetaList = np.array([np.pi/4 , np.pi/4])
 
-T = FkinSpace(M,SList,ThetaList)
+Js = JacobianSpace(Slist, ThetaList)
 
-print(T)
+print(Js)
+
+thetadot = np.array([0.5, 0.5])
+
+V = Js @ thetadot
+
+print("end effector velocity:")
+print(V)
